@@ -1,85 +1,28 @@
-int rectX, rectY;      // Position of square button
-int circleX, circleY;  // Position of circle button
-int rectSize = 90;     // Diameter of rect
-int circleSize = 93;   // Diameter of circle
-color rectColor, circleColor, baseColor;
-color rectHighlight, circleHighlight;
-color currentColor;
-boolean rectOver = false;
-boolean circleOver = false;
+//Global Variables
+float buttonX1, buttonY1, buttonWidth1, buttonHeight1;
+float buttonX2, buttonY2, buttonWidth2, buttonHeight2;
+float rectDisplayX, rectDisplayY, rectDisplayWidth, rectDisplayHeight;
+float circleX, circleY, circleWidth, circleHeight;
 
-void setup() {
-  size(640, 360);
-  rectColor = color(0);
-  rectHighlight = color(#3D3BFF);
-  circleColor = color(#FF3BEC);
-  circleHighlight = color(204);
-  baseColor = color(102);
-  currentColor = baseColor;
-  circleX = width/2+circleSize/2+10;
-  circleY = height/2;
-  rectX = width/2-rectSize-10;
-  rectY = height/2-rectSize/2;
-  ellipseMode(CENTER);
-}
+void setup()
+{
+  size(500, 400);
+  population();
 
-void draw() {
-  update(mouseX, mouseY);
-  background(currentColor);
-  
-  if (rectOver) {
-    fill(rectHighlight);
-  } else {
-    fill(rectColor);
-  }
-  stroke(255);
-  rect(rectX, rectY, rectSize, rectSize);
-  
-  if (circleOver) {
-    fill(circleHighlight);
-  } else {
-    fill(circleColor);
-  }
-  stroke(0);
-  ellipse(circleX, circleY, circleSize, circleSize);
-}
+}//End setup()
 
-void update(int x, int y) {
-  if ( overCircle(circleX, circleY, circleSize) ) {
-    circleOver = true;
-    rectOver = false;
-  } else if ( overRect(rectX, rectY, rectSize, rectSize) ) {
-    rectOver = true;
-    circleOver = false;
-  } else {
-    circleOver = rectOver = false;
-  }
-}
+void draw()
+{
+  rect(buttonX1, buttonY1, buttonWidth1, buttonHeight1);
+  rect(buttonX2, buttonY2, buttonWidth2, buttonHeight2);
+  rect(rectDisplayX, rectDisplayY, rectDisplayWidth, rectDisplayHeight);
+  ellipse(circleX, circleY, circleWidth, circleHeight);
+}//End draw()
 
-void mousePressed() {
-  if (circleOver) {
-    currentColor = circleColor;
-  }
-  if (rectOver) {
-    currentColor = rectColor;
-  }
-}
+void mousePressed()
+{
+}//End mousePressed()
 
-boolean overRect(int x, int y, int width, int height)  {
-  if (mouseX >= x && mouseX <= x+width && 
-      mouseY >= y && mouseY <= y+height) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-boolean overCircle(int x, int y, int diameter) {
-  float disX = x - mouseX;
-  float disY = y - mouseY;
-  if (sqrt(sq(disX) + sq(disY)) < diameter/2 ) {
-    return true;
-  } else {
-    return false;
-  }
-}
+void keyPressed()
+{
+}//End keyPressed()
